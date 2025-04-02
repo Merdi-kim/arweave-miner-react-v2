@@ -1,0 +1,1 @@
+export const ONE_TERABYTE = 1099511627776;
