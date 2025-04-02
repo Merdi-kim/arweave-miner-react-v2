@@ -31,7 +31,7 @@ const Navbar = () => {
             </>
           )}
           {isModalOpen && (
-            <div className="fixed inset-0 w-full flex flex-col items-center justify-center overflow-y-auto bg-[url(/add_miner_background.svg)] bg-cover bg-white/40">
+            <div className="fixed inset-0 w-full flex flex-col items-center justify-center overflow-y-auto bg-black/60">
               <AddMinerModal
                 handleCloseModal={setIsModalOpen}
               />

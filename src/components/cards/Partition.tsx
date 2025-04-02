@@ -33,34 +33,34 @@ const Partition:FC<{metrics:PrometheusMetrics, performanceRates:Array<{[key: str
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
     <div className='bg-white border border-gray-100 w-full p-3 sm:p-5 md:p-6 rounded-xl mb-6 shadow'>
-      <div className='flex justify-between'>
-        <div className='text-lg md:text-2xl font-normal text-gray-700'>Partition <span className='font-medium text-black'>#{metrics.labels.partition_number}</span></div>
-        <AccordionTrigger><span className="hidden md:flex">Performance</span></AccordionTrigger> 
+      <div className='flex justify-between items-start'>
+        <div className='text-lg md:text-xl font-normal text-gray-700'>Partition <span className='font-semibold text-black'>#{metrics.labels.partition_number}</span></div>
+        <AccordionTrigger className="h-2 flex items-center"><span className="hidden md:flex">Performance</span></AccordionTrigger> 
       </div>
       <div className='bg-gray-50 rounded-xl p-2 md:p-6 flex flex-col md:flex-row gap-10 justify-between text-gray-700 font-normal'>
-        <div className="flex gap-14 text-base sm:text-xl md:text-2xl">
+        <div className="flex gap-14 text-base md:text-xl">
             <div className='flex flex-col gap-1 md:gap-3'>
               <div>Data Size</div>
-              <div className="font-semibold lg:text-3xl">{data_size} TiB</div>
+              <div className="font-semibold lg:text-2xl">{data_size} TiB</div>
             </div>
             <div className='flex flex-col gap-1 md:gap-3'>
               <div>% of Max</div>
-              <div className="font-semibold lg:text-3xl">{data_size_percentage} %</div>
+              <div className="font-semibold lg:text-2xl">{data_size_percentage} %</div>
             </div>
         </div>
 
-        <div className="flex gap-2 md:gap-20 text-xs sm:text-base sm:min-w-[400px]">
+        <div className="flex gap-2 md:gap-20 text-sm sm:min-w-[400px]">
             <div className="flex-1">
-                <div className="font-medium text-black mb-3">Read Information</div>
-                <div className="flex flex-col gap-1">
+                <div className="font-medium text-black mb-2 text-base md:text-lg">Read Information</div>
+                <div className="flex flex-col gap-[2px]">
                     <div>Current : <span className="text-black font-medium">{read_rate} MiB/s</span> </div>
                     <div>Ideal : <span className="text-black font-medium">{ideal_read_rate} MiB/s</span></div>
                     <div>% of Ideal : <span className="text-black font-medium">{read_percentage} %</span></div>
                 </div>
             </div>
             <div className="flex-1">
-                <div className="font-medium text-black mb-3">Hash Information</div>
-                <div className="flex flex-col gap-1">
+                <div className="font-medium text-black mb-2 text-base md:text-lg">Hash Information</div>
+                <div className="flex flex-col gap-[2px]">
                     <div>Current : <span className="text-black font-medium">{hash_rate} h/s</span> </div>
                     <div>Ideal : <span className="text-black font-medium">{ideal_hash_rate} h/s</span></div>
                     <div>% of Ideal : <span className="text-black font-medium">{hash_percentage} %</span></div>
