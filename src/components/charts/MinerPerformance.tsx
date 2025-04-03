@@ -1,4 +1,4 @@
-import { Area, LineChart, Line, XAxis } from "recharts"
+import { LineChart, Line, XAxis } from "recharts"
 
 import {
   Card,
