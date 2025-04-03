@@ -1,5 +1,6 @@
 import Partition from '@/components/cards/Partition'
 import TotalRate from '@/components/cards/TotalRate'
+import NotFound from '@/components/NotFound'
 import MinerInfoLoading from '@/components/skeletons/MinerInfoLoading'
 import useMinerMetrics from '@/hooks/useMinerMetrics'
 
@@ -10,8 +11,10 @@ const MinerInfo = () => {
     return <MinerInfoLoading/>
   }
 
-  const read_percentage = ((Number(minerCombinedMetrics?.totalReadRate)/Number(minerCombinedMetrics?.totalIdealReadRate))*100).toFixed(2)
-  const hash_percentage = ((Number(minerCombinedMetrics?.totalHashRate)/Number(minerCombinedMetrics?.totalIdealHashRate))*100).toFixed(2)
+  const read_percentage_num = Number(minerCombinedMetrics?.totalReadRate)
+  const hash_percentage_num = Number(minerCombinedMetrics?.totalHashRate)
+  const read_percentage = read_percentage_num === 0 ? "0.00" : ((read_percentage_num/Number(minerCombinedMetrics?.totalIdealReadRate))*100).toFixed(2)
+  const hash_percentage = hash_percentage_num === 0 ? "0.00" : ((hash_percentage_num/Number(minerCombinedMetrics?.totalIdealHashRate))*100).toFixed(2)
   
   return (
     <div className='py-10'>
@@ -25,10 +28,13 @@ const MinerInfo = () => {
         <TotalRate title={"% Ideal Hash Rate"} metric={hash_percentage} unit={"%"}/>
       </div>
       <div className='mt-10'>
+        { !!minerCombinedMetrics?.minerMetrics?.length ? <>
         { minerCombinedMetrics?.minerMetrics?.map((metrics, index) =>  {
           const minerPerformanceRates = minerCombinedMetrics.minerRatesOverTime[metrics.labels.partition_number]
           return <Partition key={index} metrics={metrics} performanceRates = {minerPerformanceRates}/>
         })}
+        </> : <NotFound msg='No partitions found'/>
+        }
       </div>
     </div>
   )

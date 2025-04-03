@@ -2,13 +2,28 @@ import useMinerMetrics from "@/hooks/useMinerMetrics"
 import miner_logo from "@/assets/miner.svg"
 import arrow_in_logo from "@/assets/arrow_in.svg"
 import arrow_out_logo from "@/assets/arrow_out.svg"
+import NotFound from "@/components/NotFound"
+
+
+type TPeer = {
+  peer:string,
+      h1_in: string,
+      h1_out: string,
+      h2_in: string,
+      h2_out: string
+}
+
+type Column = {
+  key:string 
+  label:string 
+}
 
 const Peers = () => {
 
   const {metrics} = useMinerMetrics()
 
   const data = Object.keys(metrics?.coordinatedMiningData || {}).map((peer) => {
-    const transformedData = {
+    const transformedData:TPeer = {
       peer,
       h1_in: Number(metrics?.coordinatedMiningData[peer].h1.from).toFixed(2),
       h1_out: Number(metrics?.coordinatedMiningData[peer].h1.to).toFixed(2),
@@ -18,31 +33,26 @@ const Peers = () => {
     return transformedData
   })
 
-  const columns = [
+  const columns:Array<Column> = [
     {
       key:"peer",
-      label:"Peer",
-      icon:""
+      label:"Peer"
     },
     {
       key:"h1_in",
-      label:"Hash 1 In",
-      icon:""
+      label:"Hash 1 In"
     },
     {
       key:"h1_out",
-      label:"Hash 1 Out",
-      icon:""
+      label:"Hash 1 Out"
     },
     {
       key:"h2_in",
-      label:"Hash 2 In",
-      icon:""
+      label:"Hash 2 In"
     },
     {
       key:"h2_out",
-      label:"Hash 2 Out",
-      icon:""
+      label:"Hash 2 Out"
     }
   ]
 
@@ -72,7 +82,12 @@ const Peers = () => {
                     <>{col.key =="peer" && <img src={miner_logo} alt="miner" className="h-4 mr-2" />}</> 
                     <>{(col.key == "h1_in" || col.key == "h2_in") && <img src={arrow_in_logo} alt="arrow_in" className="h-4 mr-2" />}</>
                     <>{(col.key == "h1_out" || col.key == "h2_out") && <img src={arrow_out_logo} alt="arrow_out" className="h-4 mr-2" />}</>
-                    <>{row[col.key]}</>
+                    <>
+                      {
+                        //@ts-ignore
+                        row[col.key]
+                      }
+                    </>
                     <>{(col.key =="h1_in" || col.key == "h1_out") && <span className="ml-1">h/s</span>}</>
                   </div>
                 </td>
@@ -82,14 +97,17 @@ const Peers = () => {
         </tbody>
       </table>
       </div>
-      <div className="md:hidden flex flex-col items-center">
+      {!!data.length && <div className="md:hidden flex flex-col items-center">
         {data.map((peer, index) => <Peer key={index} data={peer} />)}
-      </div>
+      </div>}
+      {!!data.length && <div className="md:hidden flex flex-col items-center">
+        <NotFound msg='No peers found'/>
+      </div>} 
     </div>
   )
 }
 
-const Peer = ({data}) => {
+const Peer = ({data}:{data:TPeer}) => {
   return (
     <div className="min-w-[370px] sm:min-w-[500px] border border-gray-300 rounded-xl p-2 my-3">
       <div className="h-8 w-full flex items-center  border-b border-b-gray-300">
