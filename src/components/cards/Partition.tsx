@@ -33,9 +33,9 @@ const Partition:FC<{metrics:PrometheusMetrics, performanceRates:Array<{[key: str
     <Accordion type="single" collapsible>
       <AccordionItem value="item-1">
     <div className='bg-white border border-gray-100 w-full p-3 sm:p-5 md:p-6 rounded-xl mb-6 shadow'>
-      <div className='flex justify-between items-start'>
+      <div className='flex justify-between mb-4'>
         <div className='text-lg md:text-xl font-normal text-gray-700'>Partition <span className='font-semibold text-black'>#{metrics.labels.partition_number}</span></div>
-        <AccordionTrigger className="h-2 flex items-center"><span className="hidden md:flex">Performance</span></AccordionTrigger> 
+        <AccordionTrigger/> 
       </div>
       <div className='bg-gray-50 rounded-xl p-2 md:p-6 flex flex-col md:flex-row gap-10 justify-between text-gray-700 font-normal'>
         <div className="flex gap-14 text-base md:text-xl">

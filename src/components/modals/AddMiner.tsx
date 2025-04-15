@@ -75,7 +75,7 @@ const AddMinerModal = ({
           )}
           <Button
             type="submit"
-            className="h-8 flex-1 sm:h-10 sm:w-28 hover:text-black hover:font-bold text-white bg-black hover:bg-white "
+            className="h-8 flex-1 sm:h-10 sm:w-28 hover:text-black font-bold text-white bg-black hover:bg-white "
           >
             Add Miner
           </Button>
